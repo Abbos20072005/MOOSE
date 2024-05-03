@@ -49,7 +49,7 @@
                         {% endif %}
                         {% for i in posts.paginator.page_range %}
                             {% if posts.number == i %}
-                               <li class="active"><span>{{ i }}</span></li>-->
+                               <li class="active"><span>{{ i }}</span></li>
                             {% else %}
                                <li><a href="?page={{ i }}">{{ i }}</a></li>
                             {% endif %}

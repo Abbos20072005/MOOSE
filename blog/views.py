@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from .models import Post, Contact, Comment
 from django.core.paginator import Paginator
 import requests
+
 BOT_TOKEN = '6380957235:AAHOgqvvnffZL4deU_pY79mieYdBJYr0J-w'
 CHAT_ID = '1624671606'
 
+
 def home_view(request):
-    posts = Post.objects.filter(is_published=True).order_by('-view_count')[:2 ]
+    posts = Post.objects.filter(is_published=True).order_by('-view_count')[:2]
     d = {
         'posts': posts,
         'home': 'active'
