@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from .models import Post, Contact, Comment
 from django.core.paginator import Paginator
@@ -8,7 +9,7 @@ CHAT_ID = '1624671606'
 
 
 def home_view(request):
-    posts = Post.objects.filter(is_published=True).order_by('-view_count')[:2]
+    posts = Post.objects.annotate(num_comments=Count('comments')).filter(is_published=True).order_by('-view_count')[:2]
     d = {
         'posts': posts,
         'home': 'active'
@@ -21,7 +22,7 @@ def about_view(request):
 
 
 def blog_details_view(request, pk):
-    post = Post.objects.get(id=pk)
+    post = Post.objects.annotate(num_comments=Count('comments')).get(id=pk)
     comments = Comment.objects.filter(post_id=pk, is_visible=True)
     d = {
         'post': post,
@@ -47,14 +48,14 @@ def blog_view(request):
     cat = data.get('cat', None)
     page = data.get('page', 1)
     if cat:
-        posts = Post.objects.filter(is_published=True, category_id=cat)
+        posts = Post.objects.annotate(num_comments=Count('comments')).filter(is_published=True, category_id=cat).order_by('-created_at')
         d = {
             'posts': posts,
             'blog': 'active',
         }
         return render(request, 'blog.html', context=d)
 
-    posts = Post.objects.filter(is_published=True)
+    posts = Post.objects.annotate(num_comments=Count('comments')).filter(is_published=True).order_by('-created_at')
     page_obj = Paginator(posts, 2)
     d = {
         'blog': 'active',

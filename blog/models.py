@@ -46,7 +46,7 @@ class Contact(models.Model):
 
 class Comment(models.Model):
     full_name = models.CharField(max_length=50)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True, related_name='comments')
     email = models.EmailField()
     message = models.TextField()
 
