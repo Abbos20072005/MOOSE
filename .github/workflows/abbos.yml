@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Deploy to Development Server
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.MOOSE_SECRET_KEY }}
           HOST: ${{ secrets.HOST }}
         run: |
           echo "${SSH_PRIVATE_KEY}" > ssh_key
