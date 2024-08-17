@@ -44,9 +44,9 @@ jobs:
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
           ssh root@$HOST << 'EOF'
-#            set -e
+            set -e
             cd /root/Abbos/MOOSE
             git pull
-#            sudo systemctl restart abbos_moose.service
-#            sudo systemctl status abbos_moose.service
+            sudo systemctl restart abbos_moose.service
+            sudo systemctl status abbos_moose.service
           EOF
