@@ -45,8 +45,8 @@ jobs:
 
           ssh root@$HOST << 'EOF'
             set -e
-            cd /root/CRM_BACKEND/fsp-crm-backend
+            cd /root/Abbos/MOOSE
             git pull
-            sudo systemctl restart cr_m.service
-            sudo systemctl status cr_m.service
+            sudo systemctl restart abbos_moose.service
+            sudo systemctl status abbos_moose.service
           EOF
